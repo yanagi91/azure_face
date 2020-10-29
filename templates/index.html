@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure 逃げ恥判定</title>
+</head>
+<body>
+    <h1>
+        画像をアップロードしてください
+    </h1>
+    <form method = post enctype = multipart/form-data>
+    <!-- ドロップダウンリストの作成 -->
+    <select name = "select_name">
+        <option value="AragakiYui">新垣結衣</option>
+        <option value="HoshinoGen">星野源</option>
+        <option value="ManoErina">真野恵里菜</option>
+    </select>
+    <!-- ファイル選択 -->
+    <p><input type = file name = file>
+    <!-- 送信ボタン -->
+    <input type = submit value = Upload>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class=flashes>
+      <!-- message when sending -->
+      {% for category, message in messages %}
+      <div class="{{ category }}" >{{ message }}</div>
+      {% endfor %}
+      {% if dst_img %}
+      <!-- 判定後の画像表示 -->
+      <img src={{url_for('static', filename=dst_img)}} class="img-fluid" alt="Responsive image">
+      {% endif %}
+    </div>
+    {% endif %}
+    {% endwith %}
+</body>
+</html>
